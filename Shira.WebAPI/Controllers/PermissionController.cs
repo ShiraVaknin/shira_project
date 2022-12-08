@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Shira.Common.DTOs;
 using Shira.Mock;
-using Shira.Repositories.Entities;
-using Shira.Repositories.Interfaces;
 using Shira.Repositories.Repositories;
+using Shira.Services.Interfaces;
 
 namespace Shira.WebAPI.Controllers
 {
@@ -11,36 +11,40 @@ namespace Shira.WebAPI.Controllers
     [ApiController]
     public class PermissionController : ControllerBase
     {
-        private readonly IPermissionRepository _permissionRepository;
-        public PermissionController()
+        private readonly IPermissionService _permissionServise;
+        public PermissionController(IPermissionService permissionServise)
         {
-            var mock = new MockContext();
-            _permissionRepository = new PermissionRepository(mock);
+            _permissionServise = permissionServise;
         }
+
         [HttpGet]
-        public List<Permission> Get()
+        public List<PermissionDTO> Get()
         {
-            return _permissionRepository.GetAll();
+            return _permissionServise.GetAll();
         }
+
         [HttpGet("{id}")]
-        public Permission GetById(int Id)
+        public PermissionDTO GetById(int id)
         {
-            return _permissionRepository.GetById(Id);
+            return _permissionServise.GetById(id);
         }
+
         [HttpPost]
-        public void insert(int Id, string Name, string Description)
+        public void insert(int id, string name, string description)
         {
-            _permissionRepository.Add(Id, Name, Description);
+            _permissionServise.AddAsync(id, name, description);
         }
+
         [HttpPost]
-        public void Update(Permission Permission)
+        public void Update(PermissionDTO permission)
         {
-            _permissionRepository.Update(Permission);
+            _permissionServise.UpdateAsync(permission);
         }
+
         [HttpDelete]
-        public void delete(int Id)
+        public void delete(int id)
         {
-            _permissionRepository.Delete(Id);
+            _permissionServise.DeleteAsync(id);
         }
     }
 }

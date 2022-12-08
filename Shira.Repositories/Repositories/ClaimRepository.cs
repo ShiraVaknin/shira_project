@@ -17,17 +17,19 @@ namespace Shira.Repositories.Repositories
             _context = context; 
         }
 
-        public Claim Add(int id, int roleId, int permissionId, EPolicy policy)
+        public async Task<Claim> AddAsync(int id, int roleId, int permissionId, EPolicy policy)
         {
             Claim claim = new Claim { Id = id, RoleId = roleId, PermissionId = permissionId, Policy = policy };
-            _context.Claims.Add(claim); 
+            _context.Claims.Add(claim);
+            await _context.SaveChangesAsync();
             return claim;   
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             Claim claim =GetById(id);
-            _context.Claims.Remove(claim);  
+            _context.Claims.Remove(claim);
+            await _context.SaveChangesAsync();
         }
 
         public List<Claim> GetAll()
@@ -40,11 +42,12 @@ namespace Shira.Repositories.Repositories
             return _context.Claims.Where(p => p.Id == id).FirstOrDefault(); 
         }
 
-        public Claim Update(Claim claim)
+        public async Task<Claim> UpdateAsync(Claim claim)
         {
             var c = GetById(claim.Id);
             claim.RoleId = c.RoleId;
             claim.PermissionId = c.PermissionId;
+            await _context.SaveChangesAsync();
             return claim;
         }
     }

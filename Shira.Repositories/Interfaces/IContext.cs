@@ -15,5 +15,7 @@ namespace Shira.Repositories.Interfaces
 
         public List <Claim> Claims { get; set; }
 
+        Task<int> SaveChangesAsync();
+
     }
 }

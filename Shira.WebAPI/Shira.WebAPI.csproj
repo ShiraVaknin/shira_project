@@ -11,8 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Shira.Common\Shira.Common.csproj" />
     <ProjectReference Include="..\Shira.Mock\Shira.Mock.csproj" />
     <ProjectReference Include="..\Shira.Repositories\Shira.Repositories.csproj" />
+    <ProjectReference Include="..\Shira.Services\Shira.Services.csproj" />
   </ItemGroup>
 
 </Project>

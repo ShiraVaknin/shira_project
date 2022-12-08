@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Shira.Common\Shira.Common.csproj" />
+    <ProjectReference Include="..\Shira.Repositories\Shira.Repositories.csproj" />
+  </ItemGroup>
+
 </Project>

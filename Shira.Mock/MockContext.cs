@@ -16,6 +16,19 @@ namespace Shira.Mock
 
         public List<Claim> Claims { get; set; }
 
+        private int saveIndex;
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await Task.Run(() => GetSaveIndex());
+        }
+
+        private int GetSaveIndex()
+        {
+            return saveIndex++;
+        }
+
+
         public MockContext()
         {
             Claims = new List<Claim>();

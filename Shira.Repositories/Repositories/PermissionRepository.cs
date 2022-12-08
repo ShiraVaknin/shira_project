@@ -19,18 +19,20 @@ namespace Shira.Repositories.Repositories
 
         public int Id { get; private set; }
 
-        public Permission Add(int id, string name, string description)
+        public async Task<Permission> AddAsync(int id, string name, string description)
         {
             Permission permission = new Permission { Id = id, Name = name, Description = description };
-            _context.Permissions.Add(permission);   
+            _context.Permissions.Add(permission);
+            await _context.SaveChangesAsync();
             return permission;  
         }
 
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             Permission permission =GetById(id);    
             _context.Permissions.Remove(permission);
+            await _context.SaveChangesAsync();
         }
 
         public List<Permission> GetAll()
@@ -43,11 +45,12 @@ namespace Shira.Repositories.Repositories
             return _context.Permissions.FirstOrDefault(x => x.Id == id);    
         }
 
-        public Permission Update(Permission permission)
+        public async Task<Permission> UpdateAsync(Permission permission)
         {
             var p = GetById(permission.Id);
             permission.Name = p.Name;
             permission.Description = p.Description;
+            await _context.SaveChangesAsync();
             return permission;
         }
     }

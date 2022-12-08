@@ -15,11 +15,11 @@ namespace Shira.Repositories.Interfaces
 
         Claim GetById(int id);
 
-        Claim Add(int id, int RoleId, int PermissionId, EPolicy policy);
+        Task<Claim> AddAsync(int id, int roleId, int permissionId, EPolicy policy);
 
-        Claim Update(Claim claim);
+        Task<Claim> UpdateAsync(Claim claim);
 
-        void Delete(int id);   
+        Task DeleteAsync(int id);   
         
     }
 }

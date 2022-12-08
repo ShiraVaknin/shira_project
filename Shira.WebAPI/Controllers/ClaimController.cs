@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Shira.Common.DTOs;
 using Shira.Mock;
-using Shira.Repositories.Entities;
-using Shira.Repositories.Interfaces;
 using Shira.Repositories.Repositories;
+using Shira.Services.Interfaces;
 
 namespace Shira.WebAPI.Controllers
 {
@@ -11,36 +11,41 @@ namespace Shira.WebAPI.Controllers
     [ApiController]
     public class ClaimController : ControllerBase
     {
-        private readonly IClaimRepository _claimRepository;
-        public ClaimController()
+        private readonly IClaimService _claimServise;
+
+        public ClaimController(IClaimService claimServise)
         {
-            var mock = new MockContext();
-            _claimRepository = new ClaimRepository(mock);
+            _claimServise = claimServise;
         }
+
         [HttpGet]
-        public List<Claim> Get()
+        public List<ClaimDTO> Get()
         {
-            return _claimRepository.GetAll();
+            return _claimServise.GetAll();
         }
+
         [HttpGet("{id}")]
-        public Claim GetById(int Id)
+        public ClaimDTO GetById(int id)
         {
-            return _claimRepository.GetById(Id);
+            return _claimServise.GetById(id);
         }
+
         [HttpPost]
-        public void insert(int Id, int RoleId, int PermissionId, EPolicy Policy)
+        public void insert(int id, int roleId, int permissionId, ClaimDTO.EPolicy policy)
         {
-            _claimRepository.Add(Id, RoleId, PermissionId, Policy);
+            _claimServise.AddAsync(id, roleId, permissionId, policy);
         }
+
         [HttpPost]
-        public void Update(Claim Claim)
+        public void Update(ClaimDTO claim)
         {
-            _claimRepository.Update(Claim);
+            _claimServise.UpdateAsync(claim);
         }
+
         [HttpDelete]
-        public void delete(int Id)
+        public void delete(int id)
         {
-            _claimRepository.Delete(Id);
+            _claimServise.DeleteAsync(id);
         }
     }
 }

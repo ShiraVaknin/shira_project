@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Shira.Common.DTOs;
 using Shira.Mock;
-using Shira.Repositories.Entities;
-using Shira.Repositories.Interfaces;
 using Shira.Repositories.Repositories;
+using Shira.Services.Interfaces;
 
 namespace Shira.WebAPI.Controllers
 {
@@ -11,36 +11,40 @@ namespace Shira.WebAPI.Controllers
     [ApiController]
     public class RoleController : ControllerBase
     {
-        private readonly IRoleRepository _roleRepository;
-        public RoleController()
+        private readonly IRoleService _roleService;
+        public RoleController(IRoleService roleService)
         {
-            var mock = new MockContext();
-            _roleRepository = new RoleRepository(mock);
+            _roleService = roleService;
         }
+
         [HttpGet]
-        public List<Role> Get()
+        public List<RoleDTO> Get()
         {
-            return _roleRepository.GetAll();
+            return _roleService.GetAll();
         }
+
         [HttpGet("{id}")]
-        public Role GetById(int Id)
+        public RoleDTO GetById(int id)
         {
-            return _roleRepository.GetById(Id);
+            return _roleService.GetById(id);
         }
+
         [HttpPost]
-        public void insert(int Id, string Name, string Description)
+        public void insert(int id, string name, string description)
         {
-            _roleRepository.Add(Id, Name, Description);
+            _roleService.AddAsync(id, name, description);
         }
+
         [HttpPost]
-        public void Update(Role Role)
+        public void Update(RoleDTO role)
         {
-            _roleRepository.Update(Role);
+            _roleService.UpdateAsync(role);
         }
+
         [HttpDelete]
-        public void delete(int Id)
+        public void delete(int id)
         {
-            _roleRepository.Delete(Id);
+            _roleService.DeleteAsync(id);
         }
     }
 }

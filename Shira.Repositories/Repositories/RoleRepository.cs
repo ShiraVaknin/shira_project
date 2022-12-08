@@ -27,25 +27,28 @@ namespace Shira.Repositories.Repositories
             return _context.Roles.FirstOrDefault(r => r.Id == id);
         }
 
-        public Role Add(int id, string name, string description)
+        public async Task<Role> AddAsync(int id, string name, string description)
         {
             Role role = new Role { Id = id, Name = name, Description = description };    
             _context.Roles.Add(role);
+            await _context.SaveChangesAsync();  
             return role;    
         }
 
-        public Role Update(Role role)
+        public async Task<Role> UpdateAsync(Role role)
         {
             var r = GetById(role.Id);
             role.Name = r.Name;
             role.Description = r.Description;
+            await _context.SaveChangesAsync();
             return role;
         }
 
-        public void Delete (int id)
+        public async Task DeleteAsync(int id)
         {
             Role role = GetById(id);
             _context.Roles.Remove(role);
+            await _context.SaveChangesAsync();
         }
 
 

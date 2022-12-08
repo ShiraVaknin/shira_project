@@ -13,10 +13,10 @@ namespace Shira.Repositories.Interfaces
 
         Permission GetById(int id);
 
-        Permission Add(int id, string name, string decraption);
+        Task<Permission> AddAsync(int id, string name, string decraption);
 
-        Permission Update(Permission permissionole);
+        Task<Permission> UpdateAsync(Permission permissionole);
 
-        void Delete(int id);
+        Task DeleteAsync(int id);
     }
 }
