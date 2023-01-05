@@ -1,4 +1,5 @@
-﻿using Shira.Repositories.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Shira.Repositories.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,13 @@ namespace Shira.Repositories.Interfaces
 {
     public interface IContext
     {
-        public List <Role> Roles { get; set; }
+        public DbSet <Role> Roles { get; set; }
 
-        public List <Permission> Permissions { get; set; }  
+        public DbSet<Permission> Permissions { get; set; }  
 
-        public List <Claim> Claims { get; set; }
+        public DbSet<Claim> Claims { get; set; }
 
-        Task<int> SaveChangesAsync();
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

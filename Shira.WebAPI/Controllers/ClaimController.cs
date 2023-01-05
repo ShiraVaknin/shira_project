@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Shira.Common.DTOs;
 using Shira.Mock;
-using Shira.Repositories.Repositories;
 using Shira.Services.Interfaces;
 
 namespace Shira.WebAPI.Controllers
@@ -19,33 +18,33 @@ namespace Shira.WebAPI.Controllers
         }
 
         [HttpGet]
-        public List<ClaimDTO> Get()
+        public async Task<List<ClaimDTO>> Get()
         {
-            return _claimServise.GetAll();
+            return await _claimServise.GetAllAsync();
         }
 
         [HttpGet("{id}")]
-        public ClaimDTO GetById(int id)
+        public async Task<ClaimDTO> GetById(int id)
         {
-            return _claimServise.GetById(id);
+            return await _claimServise.GetByIdAsync(id);
         }
 
         [HttpPost]
-        public void insert(int id, int roleId, int permissionId, ClaimDTO.EPolicy policy)
+        public async Task insert(int id, int roleId, int permissionId, Shira.Repositories.Entities.EPolicy policy)
         {
-            _claimServise.AddAsync(id, roleId, permissionId, policy);
+            await _claimServise.AddAsync(id, roleId, permissionId, policy);
         }
 
         [HttpPost]
-        public void Update(ClaimDTO claim)
+        public async Task Update(ClaimDTO claim)
         {
-            _claimServise.UpdateAsync(claim);
+            await _claimServise.UpdateAsync(claim);
         }
 
         [HttpDelete]
-        public void delete(int id)
+        public async Task delete(int id)
         {
-            _claimServise.DeleteAsync(id);
+             await _claimServise.DeleteAsync(id);
         }
     }
 }

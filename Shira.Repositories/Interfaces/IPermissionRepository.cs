@@ -9,9 +9,9 @@ namespace Shira.Repositories.Interfaces
 {
     public interface IPermissionRepository
     {
-        List<Permission> GetAll();
+        Task<List<Permission>> GetAllAsync();
 
-        Permission GetById(int id);
+        Task<Permission> GetByIdAsync(int id);
 
         Task<Permission> AddAsync(int id, string name, string decraption);
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Shira.Mock
 {
-    public class MockContext: IContext
+    public class MockContext//: IContext
     {
         public List<Role> Roles { get; set; }
 

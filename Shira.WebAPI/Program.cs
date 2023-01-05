@@ -1,6 +1,7 @@
 using Shira.Repositories;
 using Shira.Repositories.Interfaces;
 using Shira.Mock;
+using Shira.DataContex;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddRepositories();
-builder.Services.AddScoped<IContext, MockContext>();    
+//builder.Services.AddScoped<IContext, MockContext>();    
+builder.Services.AddDbContext<IContext, DataContext>();
 
 var app = builder.Build();
 

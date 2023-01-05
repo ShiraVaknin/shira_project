@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shira.Services", "T:\C#\Shi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shira.WebAPI", "T:\C#\Shira Vaknin\shira_project\Shira.WebAPI\Shira.WebAPI.csproj", "{A26E9E02-B1B2-44F8-9317-232182247057}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shira", "T:\C#\Shira Vaknin\shira_project\ShiraVaknin\Shira.csproj", "{74852EF5-59EE-4768-93C3-7113DB2C1D87}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shira.DataContex", "Shira.DataContex\Shira.DataContex.csproj", "{9B262606-8687-4BE9-9FBE-1EE1C45467A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{A26E9E02-B1B2-44F8-9317-232182247057}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A26E9E02-B1B2-44F8-9317-232182247057}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A26E9E02-B1B2-44F8-9317-232182247057}.Release|Any CPU.Build.0 = Release|Any CPU
-		{74852EF5-59EE-4768-93C3-7113DB2C1D87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74852EF5-59EE-4768-93C3-7113DB2C1D87}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74852EF5-59EE-4768-93C3-7113DB2C1D87}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74852EF5-59EE-4768-93C3-7113DB2C1D87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B262606-8687-4BE9-9FBE-1EE1C45467A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B262606-8687-4BE9-9FBE-1EE1C45467A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B262606-8687-4BE9-9FBE-1EE1C45467A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B262606-8687-4BE9-9FBE-1EE1C45467A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

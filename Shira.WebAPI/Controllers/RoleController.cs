@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Shira.Common.DTOs;
 using Shira.Mock;
-using Shira.Repositories.Repositories;
 using Shira.Services.Interfaces;
 
 namespace Shira.WebAPI.Controllers
@@ -18,33 +17,33 @@ namespace Shira.WebAPI.Controllers
         }
 
         [HttpGet]
-        public List<RoleDTO> Get()
+        public async Task<List<RoleDTO>> Get()
         {
-            return _roleService.GetAll();
+            return await _roleService.GetAllAsync();
         }
 
         [HttpGet("{id}")]
-        public RoleDTO GetById(int id)
+        public async Task<RoleDTO> GetById(int id)
         {
-            return _roleService.GetById(id);
+            return await _roleService.GetByIdAsync(id);
         }
 
         [HttpPost]
-        public void insert(int id, string name, string description)
+        public async Task insert(int id, string name, string description)
         {
-            _roleService.AddAsync(id, name, description);
+            await _roleService.AddAsync(id, name, description);
         }
 
         [HttpPost]
-        public void Update(RoleDTO role)
+        public async Task Update(RoleDTO role)
         {
-            _roleService.UpdateAsync(role);
+            await _roleService.UpdateAsync(role);
         }
 
         [HttpDelete]
-        public void delete(int id)
+        public async Task delete(int id)
         {
-            _roleService.DeleteAsync(id);
+            await _roleService.DeleteAsync(id);
         }
     }
 }

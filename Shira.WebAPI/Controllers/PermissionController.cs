@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Shira.Common.DTOs;
 using Shira.Mock;
-using Shira.Repositories.Repositories;
 using Shira.Services.Interfaces;
 
 namespace Shira.WebAPI.Controllers
@@ -14,37 +13,37 @@ namespace Shira.WebAPI.Controllers
         private readonly IPermissionService _permissionServise;
         public PermissionController(IPermissionService permissionServise)
         {
-            _permissionServise = permissionServise;
+             _permissionServise = permissionServise;
         }
 
         [HttpGet]
-        public List<PermissionDTO> Get()
+        public async Task<List<PermissionDTO>> Get()
         {
-            return _permissionServise.GetAll();
+            return await _permissionServise.GetAllAsync();
         }
 
         [HttpGet("{id}")]
-        public PermissionDTO GetById(int id)
+        public async Task<PermissionDTO> GetById(int id)
         {
-            return _permissionServise.GetById(id);
+            return await _permissionServise.GetByIdAsync(id);
         }
 
         [HttpPost]
-        public void insert(int id, string name, string description)
+        public async Task insert(int id, string name, string description)
         {
-            _permissionServise.AddAsync(id, name, description);
+            await _permissionServise.AddAsync(id, name, description);
         }
 
         [HttpPost]
-        public void Update(PermissionDTO permission)
+        public async void Update(PermissionDTO permission)
         {
-            _permissionServise.UpdateAsync(permission);
+            await _permissionServise.UpdateAsync(permission);
         }
 
         [HttpDelete]
-        public void delete(int id)
+        public async Task delete(int id)
         {
-            _permissionServise.DeleteAsync(id);
+            await _permissionServise.DeleteAsync(id);
         }
     }
 }

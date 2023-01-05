@@ -24,7 +24,7 @@ namespace Shira.Services.Servises
 
         public async Task<ClaimDTO> AddAsync(int id, int roleId, int permissionId, EPolicy policy)
         {
-            return _mapper.Map<ClaimDTO>( await _claimRepository.AddAsync(id, roleId, permissionId, policy));
+            return _mapper.Map<ClaimDTO>( await _claimRepository.AddAsync(id, roleId, permissionId,policy));
         }
 
         public async Task DeleteAsync(int id)
@@ -32,19 +32,19 @@ namespace Shira.Services.Servises
             await _claimRepository.DeleteAsync(id);
         }
 
-        public List<ClaimDTO> GetAll()
+        public async Task<List<ClaimDTO>> GetAllAsync()
         {
-            return _mapper.Map<List<ClaimDTO>>(_claimRepository.GetAll());
+            return _mapper.Map<List<ClaimDTO>>(await _claimRepository.GetAllAsync());
         }
 
-        public ClaimDTO GetById(int id)
+        public async Task<ClaimDTO> GetByIdAsync(int id)
         {
-            return _mapper.Map<ClaimDTO>(_claimRepository.GetById(id));   
+            return _mapper.Map<ClaimDTO>(await _claimRepository.GetByIdAsync(id));   
         }
 
         public async Task<ClaimDTO> UpdateAsync(ClaimDTO claim)
         {
-            return _mapper.Map<ClaimDTO>( await _claimRepository.UpdateAsync(claim));
+            return _mapper.Map<ClaimDTO>( await _claimRepository.UpdateAsync(_mapper.Map<Claim>(claim)));
         }
     }
 }

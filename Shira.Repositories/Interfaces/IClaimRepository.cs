@@ -11,9 +11,9 @@ namespace Shira.Repositories.Interfaces
 {
     public interface IClaimRepository
     {
-        List<Claim> GetAll();
+        Task<List<Claim>> GetAllAsync();
 
-        Claim GetById(int id);
+        Task<Claim> GetByIdAsync(int id);
 
         Task<Claim> AddAsync(int id, int roleId, int permissionId, EPolicy policy);
 

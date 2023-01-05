@@ -1,4 +1,5 @@
-﻿using Shira.Repositories.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Shira.Repositories.Entities;
 using Shira.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -30,24 +31,24 @@ namespace Shira.Repositories.Repositories
 
         public async Task DeleteAsync(int id)
         {
-            Permission permission =GetById(id);    
+            Permission permission = await GetByIdAsync(id);    
             _context.Permissions.Remove(permission);
             await _context.SaveChangesAsync();
         }
 
-        public List<Permission> GetAll()
+        public async Task<List<Permission>> GetAllAsync()
         {
-            return _context.Permissions;
+            return await _context.Permissions.ToListAsync();
         }
 
-        public Permission GetById(int id)
+        public async Task<Permission> GetByIdAsync(int id)
         {
             return _context.Permissions.FirstOrDefault(x => x.Id == id);    
         }
 
         public async Task<Permission> UpdateAsync(Permission permission)
         {
-            var p = GetById(permission.Id);
+            var p = await GetByIdAsync(permission.Id);
             permission.Name = p.Name;
             permission.Description = p.Description;
             await _context.SaveChangesAsync();

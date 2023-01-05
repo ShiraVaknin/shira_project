@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Shira.Common.DTOs;
+using Shira.Repositories.Entities;
 using Shira.Repositories.Repositories;
 using Shira.Services.Interfaces;
 using System;
@@ -31,19 +32,19 @@ namespace Shira.Services.Servises
             await _roleRepository.DeleteAsync(id);  
         }
 
-        public List<RoleDTO> GetAll()
+        public async Task<List<RoleDTO>> GetAllAsync()
         {
-            return _mapper.Map<List<RoleDTO>>(_roleRepository.GetAll());   
+            return _mapper.Map<List<RoleDTO>>(await _roleRepository.GetAllAsync());   
         }
 
-        public RoleDTO GetById(int id)
+        public async Task<RoleDTO> GetByIdAsync(int id)
         {
-            return _mapper.Map<RoleDTO>(_roleRepository.GetById(id));  
+            return  _mapper.Map<RoleDTO>( await _roleRepository.GetByIdAsync(id));  
         }
 
         public async Task<RoleDTO> UpdateAsync(RoleDTO role)
         {
-            return _mapper.Map<RoleDTO>(await _roleRepository.UpdateAsync(role));
+            return _mapper.Map<RoleDTO>(await _roleRepository.UpdateAsync(_mapper.Map<Role>(role)));
 
         }
     }

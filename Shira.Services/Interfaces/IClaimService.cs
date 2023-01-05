@@ -10,9 +10,9 @@ namespace Shira.Services.Interfaces
 {
     public interface IClaimService
     {
-        List<ClaimDTO> GetAll();
+        Task<List<ClaimDTO>> GetAllAsync();
 
-        ClaimDTO GetById(int id);
+        Task<ClaimDTO> GetByIdAsync(int id);
 
         Task<ClaimDTO> AddAsync(int id, int roleId, int permissionId, EPolicy policy);
 

@@ -1,4 +1,5 @@
-﻿using Shira.Repositories.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Shira.Repositories.Entities;
 using Shira.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,14 +18,14 @@ namespace Shira.Repositories.Repositories
             _context = context;
         }
 
-        public List <Role> GetAll() 
+        public async Task<List <Role>> GetAllAsync() 
         { 
-            return _context.Roles;  
+            return await _context.Roles.ToListAsync();  
         }
 
-        public Role GetById(int id)
+        public async Task<Role> GetByIdAsync(int id)
         {
-            return _context.Roles.FirstOrDefault(r => r.Id == id);
+            return await _context.Roles.FindAsync(id);
         }
 
         public async Task<Role> AddAsync(int id, string name, string description)

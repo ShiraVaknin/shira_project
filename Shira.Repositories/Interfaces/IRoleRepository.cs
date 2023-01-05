@@ -9,9 +9,9 @@ namespace Shira.Repositories.Interfaces
 {
     public interface IRoleRepository
     { 
-        List<Role> GetAll(); 
+        Task<List<Role>> GetAllAsync(); 
 
-        Role GetById(int id);
+        Task<Role> GetByIdAsync(int id);
 
         Task<Role> AddAsync (int id, string name, string description);   
 

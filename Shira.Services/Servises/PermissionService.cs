@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Shira.Common.DTOs;
+using Shira.Repositories.Entities;
 using Shira.Repositories.Interfaces;
 using Shira.Services.Interfaces;
 using System;
@@ -31,19 +32,19 @@ namespace Shira.Services.Servises
             await _permissionRepository.DeleteAsync(id);
         }
 
-        public List<PermissionDTO> GetAll()
+        public async Task<List<PermissionDTO>> GetAllAsync()
         {
-            return _mapper.Map<List<PermissionDTO>>( _permissionRepository.GetAll()); 
+            return _mapper.Map<List<PermissionDTO>>(await _permissionRepository.GetAllAsync()); 
         }
 
-        public PermissionDTO GetById(int id)
+        public async Task<PermissionDTO> GetByIdAsync(int id)
         {
-            return _mapper.Map<PermissionDTO>(_permissionRepository.GetById(id));
+            return _mapper.Map<PermissionDTO>(await _permissionRepository.GetByIdAsync(id));
         }
 
         public async Task<PermissionDTO> UpdateAsync(PermissionDTO permissionole)
         {
-            return _mapper.Map<PermissionDTO>( await _permissionRepository.UpdateAsync(permissionole));   
+            return _mapper.Map<PermissionDTO>( await _permissionRepository.UpdateAsync(_mapper.Map<Permission>(permissionole)));   
         }
     }
 }

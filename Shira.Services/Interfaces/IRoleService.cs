@@ -10,9 +10,9 @@ namespace Shira.Services.Interfaces
 {
     public interface IRoleService
     {
-        List<RoleDTO> GetAll();
+        Task<List<RoleDTO>> GetAllAsync();
 
-        RoleDTO GetById(int id);
+        Task<RoleDTO> GetByIdAsync(int id);
 
         Task<RoleDTO> AddAsync(int id, string name, string description);
 

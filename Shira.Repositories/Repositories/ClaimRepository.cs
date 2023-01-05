@@ -1,4 +1,5 @@
-﻿using Shira.Repositories.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Shira.Repositories.Entities;
 using Shira.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -27,31 +28,30 @@ namespace Shira.Repositories.Repositories
 
         public async Task DeleteAsync(int id)
         {
-            Claim claim =GetById(id);
+            Claim claim = await GetByIdAsync(id);
             _context.Claims.Remove(claim);
             await _context.SaveChangesAsync();
         }
 
-        public List<Claim> GetAll()
+        public async Task<List<Claim>> GetAllAsync()
         {
-            return _context.Claims;    
+            return await _context.Claims.ToListAsync();    
         }
 
-        public Claim GetById(int id)
+        public async Task<Claim> GetByIdAsync(int id)
         {
-            return _context.Claims.Where(p => p.Id == id).FirstOrDefault(); 
+            return await _context.Claims.FindAsync(id); 
         }
 
         public async Task<Claim> UpdateAsync(Claim claim)
         {
-            var c = GetById(claim.Id);
+            var c = await GetByIdAsync(claim.Id);
             claim.RoleId = c.RoleId;
             claim.PermissionId = c.PermissionId;
             await _context.SaveChangesAsync();
             return claim;
         }
     }
-    //chek user
 
-    
+
 }
